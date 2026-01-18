@@ -364,18 +364,40 @@ CEVABINI SADECE AŞAĞIDAKİ JSON FORMATINDA VER (BAŞKA METİN EKLEME):
         });
 
         if (!response.ok) {
+            const errorText = await response.text();
+            console.error('🔴 generateMockExam - API Error:', response.status, errorText);
             throw new Error(`Gemini API Error: ${response.status}`);
         }
 
         const data = await response.json();
         let responseText = data.candidates[0].content.parts[0].text;
 
-        // Markdown bloklarını (```json ... ```) temizle
-        responseText = responseText.replace(/```json\s?|```/g, '').trim();
+        console.log('🔵 generateMockExam - Raw Response:', responseText);
 
-        return JSON.parse(responseText);
+        try {
+            // Clean markdown blocks if present
+            const cleanedText = responseText.replace(/```json\s?|```/g, '').trim();
+            const parsed = JSON.parse(cleanedText);
+
+            // Validate it's an array
+            if (!Array.isArray(parsed)) {
+                throw new Error('Response is not a JSON array');
+            }
+
+            return parsed;
+        } catch (parseError) {
+            console.error('🔴 generateMockExam - JSON Parse Error:', parseError);
+            console.error('🔴 generateMockExam - Failing Text:', responseText);
+
+            // Eğer JSON parse edilemezse, textten çıkarmaya çalış (fallback)
+            const jsonMatch = responseText.match(/\[\s*\{[\s\S]*\}\s*\]/);
+            if (jsonMatch) {
+                return JSON.parse(jsonMatch[0]);
+            }
+            throw new Error("Sınav soruları beklenen formatta gelmedi.");
+        }
     } catch (error) {
-        console.error('generateMockExam Error:', error);
+        console.error('🔴 generateMockExam - General Error:', error);
         throw error;
     }
 }

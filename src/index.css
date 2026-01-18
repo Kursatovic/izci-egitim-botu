@@ -398,7 +398,7 @@ select:focus {
 
 /* Adventure Theme Components */
 .wood-sign {
-  background-image: url('./assets/adventure/wood_texture.png');
+  background-image: url('/assets/adventure/wood_texture.png');
   background-size: cover;
   background-position: center;
   border: 4px solid #451a03;
@@ -435,7 +435,7 @@ select:focus {
 }
 
 .parchment-box {
-  background-image: url('./assets/adventure/parchment_texture.png');
+  background-image: url('/assets/adventure/parchment_texture.png');
   background-size: cover;
   border: 2px solid #d97706;
   border-radius: 4px;
@@ -469,7 +469,7 @@ select:focus {
 }
 
 .nature-bg {
-  background-image: url('./assets/adventure/bg_landscape.png');
+  background-image: url('/assets/adventure/bg_landscape.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

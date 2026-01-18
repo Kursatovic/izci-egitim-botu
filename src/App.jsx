@@ -6,8 +6,8 @@ import { examScenarios } from './data/scenarios';
 import { evaluateEssayAnswer, generateMockExam } from './gemini-service';
 
 // Audio Assets
-const clickSound = new Audio('/src/assets/adventure/click_wood.mp3');
-const rustleSound = new Audio('/src/assets/adventure/paper_rustle.mp3');
+const clickSound = new Audio('/assets/adventure/click_wood.mp3');
+const rustleSound = new Audio('/assets/adventure/paper_rustle.mp3');
 
 const playClick = () => {
     clickSound.currentTime = 0;
@@ -99,9 +99,9 @@ const IzciRobot = ({ mood = 'happy', isTalking = false }) => {
 
 // Ünite kartları için tematik görseller
 const unitAssets = {
-    1: { color: '#f97316', icon: '/src/assets/adventure/icon_unit1.png' },
-    2: { color: '#10b981', icon: '/src/assets/adventure/icon_unit2.png' },
-    3: { color: '#8b5cf6', icon: '/src/assets/adventure/icon_unit3.png' }
+    1: { color: '#f97316', icon: '/assets/adventure/icon_unit1.png' },
+    2: { color: '#10b981', icon: '/assets/adventure/icon_unit2.png' },
+    3: { color: '#8b5cf6', icon: '/assets/adventure/icon_unit3.png' }
 };
 
 export default function IzciApp() {
@@ -465,9 +465,9 @@ export default function IzciApp() {
                                 gap: '2rem'
                             }}>
                                 {[
-                                    { id: 'study', icon: '/src/assets/adventure/icon_study.png', title: 'Sınava Hazırlan', desc: 'Konu tekrarı yap', color: '#f97316' },
-                                    { id: 'scenario', icon: '/src/assets/adventure/icon_scenario.png', title: 'Sınav Senaryoları', desc: 'Örnek sorular gör', color: '#10b981' },
-                                    { id: 'practice', icon: '/src/assets/adventure/icon_ai.png', title: 'İzci ile Çalış', desc: 'Akıllı değerlendirme', color: '#8b5cf6' }
+                                    { id: 'study', icon: '/assets/adventure/icon_study.png', title: 'Sınava Hazırlan', desc: 'Konu tekrarı yap', color: '#f97316' },
+                                    { id: 'scenario', icon: '/assets/adventure/icon_scenario.png', title: 'Sınav Senaryoları', desc: 'Örnek sorular gör', color: '#10b981' },
+                                    { id: 'practice', icon: '/assets/adventure/icon_ai.png', title: 'İzci ile Çalış', desc: 'Akıllı değerlendirme', color: '#8b5cf6' }
                                 ].map((item) => (
                                     <button
                                         key={item.id}
@@ -1299,7 +1299,7 @@ export default function IzciApp() {
                     )}
 
                     {/* EXERCISES */}
-                    {step === 'exercises' && selectedUnit && activeSection && exercises[selectedUnit] && exercises[selectedUnit][activeSection] && (
+                    {step === 'exercises' && selectedUnit && activeSection !== null && exercises[selectedUnit] && exercises[selectedUnit][activeSection] && (
                         <div style={{
                             width: '100%', height: '100%', display: 'flex',
                             flexDirection: 'column', gap: '1.5rem', animation: 'fadeIn 0.6s ease-out'
